@@ -1,0 +1,9 @@
+{
+  "name": "BasedBotV2",
+  "version": "1.0.0",
+  "description": "This bot goes dummy.....",
+  "main": "index.js",
+  "repository": "git@github.com:Liam-Simpson98/BasedBotV2.git",
+  "author": "BasedBoys",
+  "license": "MIT"
+}

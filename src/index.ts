@@ -1,3 +1,7 @@
+/**
+ * Starts bot and brings commands into scope.
+ * 
+ */
 import dotenv from 'dotenv';
 import { Client, Intents, Message } from 'discord.js';
 import fs from 'fs';

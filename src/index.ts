@@ -16,9 +16,7 @@ const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
-const commandFiles = fs
-	.readdirSync('./src/commands/')
-	.filter((file) => file.endsWith('.ts'));
+const commandFiles = fs.readdirSync('./src/commands/');
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`).default;

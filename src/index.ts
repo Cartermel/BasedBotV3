@@ -2,21 +2,17 @@ import dotenv from 'dotenv';
 import { Client, Intents, Message } from 'discord.js';
 import fs from 'fs';
 import ICommand from './models/ICommand';
+import CommandDefinition from './models/CommandDefinition';
 
 dotenv.config();
 const PREFIX = '!';
 const commands: CommandDefinition[] = [];
 
-interface CommandDefinition {
-	name: string;
-	command: any;
-}
-
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
-const commandFiles = fs.readdirSync('./src/commands/');
+const commandFiles = fs.readdirSync(__dirname + '/commands/');
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`).default;
@@ -26,8 +22,7 @@ for (const file of commandFiles) {
 }
 
 client.on('messageCreate', async (msg: Message) => {
-	if (msg.author.bot) return;
-	if (!msg.content.startsWith(PREFIX)) return;
+	if (msg.author.bot || !msg.content.startsWith(PREFIX)) return;
 
 	const args = msg.content.split(' ');
 	const userCommand = args.shift()?.slice(PREFIX.length);

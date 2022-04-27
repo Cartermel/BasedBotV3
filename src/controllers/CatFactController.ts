@@ -8,8 +8,10 @@ export default class CatFactController {
 	 *
 	 * @param msg Discord.js Message object
 	 */
-	public async catfact(msg: Message): Promise<void> {
-		const {data: { fact }} = await axios.get('https://catfact.ninja/fact');
+	public async execute(msg: Message): Promise<void> {
+		const {
+			data: { fact },
+		} = await axios.get('https://catfact.ninja/fact');
 		await msg.reply(fact);
 	}
 }

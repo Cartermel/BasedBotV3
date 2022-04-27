@@ -1,3 +1,3 @@
 export interface ICommandRegistry {
-    getList(): Array<any>;  
+	getList(): Array<any>;
 }

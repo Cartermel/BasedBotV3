@@ -10,8 +10,7 @@ dotenv.config();
 const PREFIX = '!';
 
 // Bring registered commands into scope.
-const cr = new CommandRegistry();
-const commands = cr.getList();
+const commands = new CommandRegistry().commandList;
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -26,10 +25,8 @@ client.on('messageCreate', async (msg: Message) => {
 
 	// Run the command's respective execution method.
 	if (cmdRoute) {
-		const method = cmdRoute.executionMethod;
-		const { default: controllerImport } = await import(cmdRoute.controller);
-		const controller = new controllerImport();
-		eval('controller.' + method + '(msg, args)');
+		const { controller, executionMethod } = cmdRoute;
+		Reflect.get(new controller(), executionMethod)(msg, args);
 	}
 });
 

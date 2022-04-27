@@ -1,13 +1,15 @@
-import { ICommandRegistry} from './interfaces/ICommandRegistry';
+import { ICommandRegistry } from './interfaces/ICommandRegistry';
 
 export class CommandRegistry implements ICommandRegistry {
+	private cList: Array<any> = [
+		{
+			controller: './controllers/CatFactController',
+			executionMethod: 'execute',
+			commandInput: 'catfact',
+		},
+	];
 
-    private cList:Array<any> = [
-        {controller: './controllers/CatFactController', executionMethod: 'catfact'}
-    ];
-
-    public getList(): Array<any> {
-        return this.cList;
-    }
+	public getList(): Array<any> {
+		return this.cList;
+	}
 }
-

@@ -1,8 +1,7 @@
 import { Message } from 'discord.js';
 import axios from 'axios';
-import BaseController from '../models/BaseController';
 
-export default class CatFactController extends BaseController {
+export default class CatFactController {
 	/**
 	 * Gets a random catfact and prints it to the
 	 * discord chat.

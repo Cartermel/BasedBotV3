@@ -7,8 +7,6 @@ export default class CatFactController extends BaseController {
 	/**
 	 * Gets a random catfact and prints it to the
 	 * discord chat.
-	 *
-	 * @param msg Discord.js Message object
 	 */
 	@command('catfact')
 	public async handleCatFact(): Promise<void> {

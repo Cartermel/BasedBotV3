@@ -9,7 +9,7 @@ export default abstract class CommandInjector {
 
 	/**
 	 * Adds a Command to the list of commands,
-	 * @param param0
+	 * @param Command - the command to add
 	 * @throws when attempting to insert a duplicate command name.
 	 */
 	public static addCommandDefinition({ name, methodName }: Command) {

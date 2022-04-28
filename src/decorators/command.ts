@@ -1,4 +1,4 @@
-import CommandInjector from '../CommandInjector';
+import CommandInjector from '../services/CommandInjector';
 
 /**
  * Command annotation which adds a new Command object to the

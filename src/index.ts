@@ -1,38 +1,18 @@
 /**
- * Starts bot and brings commands into scope.
- *
+ * Entry point of the application.
+ * Loads config and starts discord bot
  */
-import dotenv from 'dotenv';
-import { Client, Intents, Message } from 'discord.js';
-import CommandInjector from './CommandInjector';
-import ControllerRegistry from './ControllerRegistry';
+import CatFactController from './controllers/CatFactController';
+import ExampleController from './controllers/ExampleController';
+import DiscordBot from './DiscordBot';
+import BaseController from './models/BaseController';
+require('dotenv').config();
 
-dotenv.config();
-const PREFIX = '!';
+// repository of all our command controllers
+function getControllers(): typeof BaseController[] {
+	return [ExampleController, CatFactController];
+}
 
-const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
-});
-
-// register our commands with controllers
-new ControllerRegistry();
-
-client.on('messageCreate', async (msg: Message) => {
-	if (msg.author.bot || !msg.content.startsWith(PREFIX)) return;
-
-	const args = msg.content.split(' ');
-	const userCommand = args.shift()?.slice(PREFIX.length);
-	const cmdRoute = CommandInjector.CommandList.find(
-		(c) => c.name === userCommand
-	);
-
-	// Run the command's respective execution method.
-	if (cmdRoute) {
-		const { Controller, methodName } = cmdRoute;
-		const instance = new Controller!(msg);
-		eval(`instance.${methodName}(args)`);
-	}
-});
-
-client.once('ready', () => console.log('Bot ready.'));
-client.login(process.env.TOKEN!);
+// register controllers with the discord bot
+const bot = new DiscordBot(getControllers());
+bot.login(process.env.TOKEN!);

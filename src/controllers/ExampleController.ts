@@ -22,6 +22,6 @@ export default class ExampleController extends BaseController {
 	 */
 	@command('params')
 	public async handleParams(args: string[]) {
-		this.message.reply(args?.join('-'));
+		this.message.reply(args.join('-'));
 	}
 }

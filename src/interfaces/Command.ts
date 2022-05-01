@@ -1,4 +1,4 @@
-import BaseController from './BaseController';
+import BaseController from 'src/models/BaseController';
 
 export default interface Command {
 	name: string;

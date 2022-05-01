@@ -1,4 +1,5 @@
-import Command from './models/Command';
+import Command from '../interfaces/Command';
+import BaseController from '../models/BaseController';
 
 export default abstract class CommandInjector {
 	public static get CommandList() {
@@ -34,9 +35,9 @@ export default abstract class CommandInjector {
 	 * and finds their associated command by the methodName using Reflection
 	 * @param controllers
 	 */
-	public static linkControllers(controllers: any[]) {
+	public static linkControllers(controllers: typeof BaseController[]) {
 		for (const Controller of controllers) {
-			const instance = new Controller(); // todo: find a way to overload constructor for BaseController
+			const instance = new Controller();
 			for (let i = 0; i < this.commandList.length; i++) {
 				const method = Reflect.get(
 					instance,

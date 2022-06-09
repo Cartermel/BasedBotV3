@@ -1,18 +1,18 @@
 import { Message } from 'discord.js';
 import axios from 'axios';
-import BaseController from '../models/BaseController';
-import command from '../decorators/command';
+import { command, controller } from '../infrastructure/injection';
 
-export default class CatFactController extends BaseController {
+@controller()
+export default class CatFactController {
 	/**
 	 * Gets a random catfact and prints it to the
 	 * discord chat.
 	 */
 	@command('catfact')
-	public async handleCatFact(): Promise<void> {
+	public async handleCatFact(message: Message) {
 		const {
 			data: { fact },
 		} = await axios.get('https://catfact.ninja/fact');
-		await this.message.reply(fact);
+		await message.reply(fact);
 	}
 }

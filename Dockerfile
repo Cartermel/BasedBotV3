@@ -20,8 +20,6 @@ COPY . .
 # build da mf
 RUN yarn build
 
-COPY .env ./dist/
-
 # Remove all node_modules folders to remove dev dependencies now that we have compiled the ts
 RUN find . -type d -name "node_modules" -prune -exec rm -r {} +
 
@@ -50,6 +48,7 @@ FROM node:16-alpine
 WORKDIR /usr/basedbot
 
 # copy from build image to the based image
+COPY .env ./
 COPY --from=BUILD_IMAGE /usr/basedbot/dist ./dist
 COPY --from=BUILD_IMAGE /usr/basedbot/node_modules ./node_modules
 

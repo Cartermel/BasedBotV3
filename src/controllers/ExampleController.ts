@@ -10,7 +10,7 @@ export class ExampleService {
 }
 
 /**
- * Example class showcasing implicit commands and BaseController functionality
+ * Example class showcasing implicit commands and tsyringe functionality
  */
 @controller()
 @injectable()

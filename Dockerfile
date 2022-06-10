@@ -1,27 +1,28 @@
 FROM node:16-alpine AS BUILD_IMAGE
 
+# install some dependencies for the build image
 RUN apk update && apk add yarn curl bash && rm -rf /var/cache/apk/*
 
+# grab node-prune which will save us ~20mb
 RUN curl -sfL https://gobinaries.com/tj/node-prune | bash -s -- -b /usr/local/bin
 
 # Create app directory
 WORKDIR /usr/basedbot
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 COPY package*.json yarn.lock ./
 
+# Install app dependencies - we need dev deps to compile the typescript
 RUN yarn --frozen-lockfile
 
 # Bundle app source
 COPY . .
 
+# build da mf
 RUN yarn build
 
 COPY .env ./dist/
 
-# Remove all node_modules folders to remove dev dependencies
+# Remove all node_modules folders to remove dev dependencies now that we have compiled the ts
 RUN find . -type d -name "node_modules" -prune -exec rm -r {} +
 
 # Download production dependencies
@@ -48,7 +49,7 @@ FROM node:16-alpine
 
 WORKDIR /usr/basedbot
 
-# copy from build image
+# copy from build image to the based image
 COPY --from=BUILD_IMAGE /usr/basedbot/dist ./dist
 COPY --from=BUILD_IMAGE /usr/basedbot/node_modules ./node_modules
 

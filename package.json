@@ -7,9 +7,9 @@
 	"author": "BasedBoys",
 	"license": "MIT",
 	"dependencies": {
+		"@app-config/main": "^2.8.4",
 		"axios": "^0.26.1",
 		"discord.js": "^13.6.0",
-		"dotenv": "^16.0.0",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
 	},
@@ -26,6 +26,7 @@
 		"build:clean": "yarn clean && yarn build",
 		"clean": "rm -rf dist",
 		"dev": "npx nodemon ./src/index.ts",
-		"docker:build": "docker build -t basedbot ."
+		"docker:build": "docker build -t basedbot .",
+		"config:generate": "app-config generate"
 	}
 }

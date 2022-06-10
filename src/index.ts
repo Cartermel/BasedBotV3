@@ -6,9 +6,15 @@ import 'reflect-metadata';
 import CatFactController from './controllers/CatFactController';
 import { ExampleController } from './controllers/ExampleController';
 import DiscordBot from './DiscordBot';
-require('dotenv').config();
+import { config, loadConfig } from '@app-config/main';
 
-// register controllers with the discord bot
-const bot = new DiscordBot([CatFactController, ExampleController]);
+async function main() {
+	await loadConfig();
+	console.log(config);
 
-bot.login(process.env.TOKEN!);
+	// register controllers with the discord bot
+	const bot = new DiscordBot([CatFactController, ExampleController]);
+	await bot.login(config.discordToken);
+}
+
+main();

@@ -51,7 +51,7 @@ WORKDIR /usr/basedbot
 ENV NODE_ENV=production
 
 # copy from build image to the based image
-COPY .env ./
+COPY .app-config.* ./
 COPY --from=BUILD_IMAGE /usr/basedbot/dist ./dist
 COPY --from=BUILD_IMAGE /usr/basedbot/node_modules ./node_modules
 

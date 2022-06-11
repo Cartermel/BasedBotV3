@@ -14,7 +14,7 @@ export default class DiscordBot extends Client {
 			intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 		});
 
-		this.prefix = config.get<string>('token');
+		this.prefix = config.get<string>('prefix');
 
 		this.once('ready', () => console.log('Bot ready.'));
 

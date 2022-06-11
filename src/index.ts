@@ -10,7 +10,10 @@ import config from './infrastructure/config';
 
 async function main() {
 	config.configure(require('../.config.json'));
-	console.log(config.get<string>('token'));
+
+	const bot = new DiscordBot([CatFactController, ExampleController]);
+
+	await bot.login(config.get<string>('token'));
 }
 
 main();

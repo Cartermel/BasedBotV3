@@ -6,15 +6,11 @@ import 'reflect-metadata';
 import CatFactController from './controllers/CatFactController';
 import { ExampleController } from './controllers/ExampleController';
 import DiscordBot from './DiscordBot';
-import { config, loadConfig } from '@app-config/main';
+import config from './infrastructure/config';
 
 async function main() {
-	await loadConfig();
-	console.log(config);
-
-	// register controllers with the discord bot
-	const bot = new DiscordBot([CatFactController, ExampleController]);
-	await bot.login(config.discordToken);
+	config.configure(require('../.config.json'));
+	console.log(config.get<string>('token'));
 }
 
 main();

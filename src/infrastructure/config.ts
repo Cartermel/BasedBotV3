@@ -17,8 +17,6 @@ class ConfigurationManager {
 
 			this.config[key] = value;
 		}
-
-		console.log(this.config);
 	}
 
 	public get<T>(key: string) {

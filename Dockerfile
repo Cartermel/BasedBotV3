@@ -48,10 +48,10 @@ FROM node:16-alpine
 WORKDIR /usr/basedbot
 
 # set environment to production by default
-ENV NODE_ENV=production
+ENV ENV=production
 
 # copy from build image to the based image
-COPY .app-config.* ./
+COPY .config.json ./
 COPY --from=BUILD_IMAGE /usr/basedbot/dist ./dist
 COPY --from=BUILD_IMAGE /usr/basedbot/node_modules ./node_modules
 

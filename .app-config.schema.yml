@@ -1,9 +1,0 @@
-type: object
-additionalProperties: false
-
-required:
-  - discordToken
-
-properties:
-  discordToken:
-    type: string

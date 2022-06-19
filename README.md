@@ -1,4 +1,4 @@
-# BasedBotV2
+# BasedBotV3
 
 ## Configuration File Schema:
 
